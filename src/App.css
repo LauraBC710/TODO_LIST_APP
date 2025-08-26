@@ -1,42 +1,160 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Fondo general */
+body {
+  background: linear-gradient(135deg, #f9c5d1, #3937bb);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 150vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Contenedor principal */
+.app {
+  background: rgb(255, 255, 255);
+  margin-top: 300px;
+  padding: 30px;
+  border-radius: 30px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  width: 500px;
+  max-width: 90%;
   text-align: center;
+  animation: fadeIn 1s ease-in-out;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Animación suave */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(-20px);}
+  to {opacity: 1; transform: translateY(0);}
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Título */
+.app h1 {
+  font-size: 2rem;
+  color: #b410c0;
+  margin-bottom: 20px;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Input */
+input {
+  padding: 10px;
+  border: 2px solid #d18ce0;
+  border-radius: 8px;
+  outline: none;
+  width: 65%;
+  font-size: 1rem;
+  transition: border 0.3s;
 }
 
-.card {
-  padding: 2em;
+input:focus {
+  border-color: #a74ac7;
 }
 
-.read-the-docs {
-  color: #888;
+/* Botón principal */
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  margin-left: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: all 0.3s;
 }
+
+/* Botón agregar */
+button:first-of-type {
+  background: #ff69b4;
+  color: white;
+}
+
+button:first-of-type:hover {
+  background: #d65ca1;
+  transform: scale(1.05);
+}
+
+/* Lista */
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  text-align: left;
+}
+
+/* Cada tarea */
+li {
+  background: #f3e8f9;
+  padding: 10px 15px;
+  margin: 10px 0;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+li:hover {
+  transform: scale(1.02);
+}
+
+/* Texto de tarea */
+li span {
+  flex: 1;
+  color: #4b0082;
+  font-size: 1rem;
+}
+
+/* Tareas completadas */
+li.completed span {
+  text-decoration: line-through;
+  color: #a0a0a0;
+}
+
+/* Botones ✔ y ❌ */
+li button {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+li button:hover {
+  transform: scale(1.2);
+}
+
+/* Botón check */
+li button:nth-of-type(1) {
+  color: #ffffff;
+}
+
+/* Botón eliminar */
+li button:nth-of-type(2) {
+  color: #ff1493;
+}
+
+/* 🌙 Estilos para modo oscuro */
+.app.dark {
+  background: #2b2b2b;
+  color: #f3e8f9;
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+}
+
+.app.dark input {
+  background: #444;
+  color: #fff;
+  border: 2px solid #a74ac7;
+}
+
+.app.dark li {
+  background: #3a3a3a;
+  color: #bb3b3b;
+}
+
+.app.dark li.completed span {
+  color: #ffffff;
+}
+
