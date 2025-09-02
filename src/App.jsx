@@ -5,6 +5,8 @@ function App() {
   const [tarea, setTarea] = useState("");
   const [lista, setLista] = useState([]);
   const [modoOscuro, setModoOscuro] = useState(false);
+  const [editando, setEditando] = useState(null); // índice de tarea en edición
+  const [textoEditado, setTextoEditado] = useState(""); // texto temporal para edición
 
   // 🔹 Cargar tareas desde localStorage al iniciar
   useEffect(() => {
@@ -41,6 +43,25 @@ function App() {
     setLista(nuevaLista);
   };
 
+  const iniciarEdicion = (index) => {
+    setEditando(index);
+    setTextoEditado(lista[index].texto);
+  };
+
+  const guardarEdicion = (index) => {
+    if (textoEditado.trim() === "") return;
+    const nuevaLista = [...lista];
+    nuevaLista[index].texto = textoEditado;
+    setLista(nuevaLista);
+    setEditando(null);
+    setTextoEditado("");
+  };
+
+  const cancelarEdicion = () => {
+    setEditando(null);
+    setTextoEditado("");
+  };
+
   // Eliminar tarea
   const eliminarTarea = (index) => {
     setLista(lista.filter((_, i) => i !== index));
@@ -53,13 +74,7 @@ function App() {
     <div className={`app ${modoOscuro ? "dark" : ""}`}>
       <h1>🌸 Mi lista de tareas 💜</h1>
 
-      {/* Botón modo oscuro */}
-      <button
-        onClick={() => setModoOscuro(!modoOscuro)}
-        style={{ marginBottom: "50px" }}
-      >
-        {modoOscuro ? "☀️ Modo Claro" : "🌙 Modo Oscuro"}
-      </button>
+      
 
       {/* Input y botón */}
       <div>
@@ -89,12 +104,27 @@ function App() {
               key={index}
               className={item.completada ? "completed" : ""}
             >
+              {editando === index ? (
+                <>
+                <input
+                  type="text"
+                  value={textoEditado}
+                  onChange={(e) => setTextoEditado(e.target.value)}
+                />
+                <button onClick={() => guardarEdicion(index)}>✔</button>
+                <button onClick={cancelarEdicion}>❌</button>
+              </>
+            ) : (
+              <>
+              
               <span>{item.texto}</span>
               <button onClick={() => toggleTarea(index)}>✔</button>
               <button onClick={() => eliminarTarea(index)}>❌</button>
-            </li>
-          ))}
-        
+              <button onClick={() => iniciarEdicion(index)}>✏️</button>
+           </>
+            )}
+          </li>
+        ))}
       </ul>
     </div>
   );
